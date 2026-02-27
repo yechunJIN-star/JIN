@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>打飞机 · 三关Boss</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      background:
+        linear-gradient(180deg, #05060a 0%, #0a0b12 60%, #0f111a 100%);
+      color: #e6e6e6;
+      font-family: 'Roboto', system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif;
+    }
+    .wrap {
+      height: 100%;
+      display: grid;
+      place-items: center;
+      position: relative;
+    }
+    #game {
+      width: 420px;
+      height: 720px;
+      image-rendering: pixelated;
+      box-shadow: 0 0 0 2px #1a1f2e, 0 20px 60px rgba(0,0,0,.6);
+      background-color: #000;
+      background-image: url("https://www.transparenttextures.com/patterns/stardust.png");
+    }
+    .overlay {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      pointer-events: none;
+    }
+    .panel {
+      pointer-events: auto;
+      text-align: center;
+      max-width: 90%;
+    }
+    h1 {
+      font-family: 'Press Start 2P', cursive;
+      letter-spacing: 1px;
+      font-size: 20px;
+      margin: 0 0 12px;
+      color: #f5f7ff;
+      text-shadow: 0 2px 0 #1b1e2b, 0 0 24px #5f7aff;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 12px 18px;
+      font-weight: 700;
+      border-radius: 10px;
+      background: linear-gradient(180deg,#6b79ff,#3b45d8);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 6px 0 #222a66, 0 10px 30px rgba(88,98,255,.35);
+      transition: transform .05s ease-in-out;
+    }
+    .btn:active { transform: translateY(2px); box-shadow: 0 4px 0 #222a66, 0 6px 20px rgba(88,98,255,.35); }
+    .subtitle { opacity: .85; font-size: 14px; }
+    .hidden { display: none; }
+    .hud {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      right: 8px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      font-weight: 700;
+      text-shadow: 0 1px 0 #000;
+      pointer-events: none;
+    }
+    .bossbar {
+      position: absolute;
+      left: 8px;
+      right: 8px;
+      bottom: 12px;
+      height: 12px;
+      border-radius: 6px;
+      background: rgba(255,255,255,.06);
+      overflow: hidden;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.08);
+      pointer-events: none;
+    }
+    .bossbar > i {
+      display: block;
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg,#ff2b2b,#b30000);
+      box-shadow: inset 0 0 12px rgba(255,25,25,.9);
+    }
+    .credit {
+      position: absolute;
+      bottom: 8px;
+      right: 10px;
+      opacity: .6;
+      font-size: 12px;
+      letter-spacing: .5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <canvas id="game" width="420" height="720"></canvas>
+    <div class="hud" id="hud">
+      <div id="hud-left">生命 3 | 关卡 1</div>
+      <div id="hud-right">得分 0</div>
+    </div>
+    <div class="bossbar hidden" id="bossbar"><i id="bossbar-fill"></i></div>
+    <div class="overlay" id="overlay">
+      <div class="panel" id="panel">
+        <h1>星域突击</h1>
+        <div id="status" class="subtitle">载入中 0%</div>
+        <button class="btn hidden" id="start">开始游戏</button>
+      </div>
+    </div>
+    <div class="credit">字体/纹理来自 Google Fonts 与 transparenttextures.com</div>
+  </div>
+  <script src="./src/game.js"></script>
+</body>
+</html>
